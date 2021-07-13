@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block head %}
+<link rel="stylesheet" type= "text/css" href= "static/css/products.css">
+{% endblock %}
+{% block content %}
+
+<table class="styled-table">
+  <tr>
+    <th>Наименование</th>
+    <th>Описание</th>
+    <th>Цена</th>
+  </tr>
+  <tr>
+    <td>Супер крутой товар</td>
+    <td>Это супер крутой товар, скорее покупай</td>
+    <td>50 руб</td>
+    <td><img src="static/images/rocket.png"  width="120" height="90" /></td>
+    <td><button type="button">В корзину</button></td>
+  </tr>
+  <tr>
+    <td>Зубная счетка</td>
+    <td>Счетка для чистки зубов</td>
+    <td>94 руб</td>
+    <td><img src="static/images/brush.jpg"  width="120" height="90" /></td>
+    <td><button type="button">В корзину</button></td>
+  </tr>
+</table>
+{% endblock %}
