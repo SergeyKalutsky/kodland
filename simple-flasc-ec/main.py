@@ -22,6 +22,12 @@ def contacts():
     return 'Контакты'
 
 
+@app.route('/register')
+def register():
+
+    return render_template('register.html')
+
+
 @app.route('/about')
 def about():
     return 'О компании'
