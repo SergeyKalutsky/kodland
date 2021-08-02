@@ -1,3 +1,4 @@
+import re
 import bcrypt
 from kodland_db import db
 from flask import Flask, render_template, request, url_for, redirect
@@ -145,13 +146,34 @@ def register():
 @app.route('/order', methods=['GET', 'POST'])
 def order():
     if request.method == 'POST':
-        print(request.form)
+        for key in request.form:
+            if request.form[key] == '':
+                return render_template('order.html', error='Не все поля заполнены!')
+            if key == 'email':
+                if not re.match('\w+@\w+\.(ru|com)', request.form[key]):
+                    return render_template('order.html', error='Не правильный формат почты')
+            if key == 'phone_number':
+                if not re.match('\+7\d{9}', request.form[key]):
+                    return render_template('order.html', error='Не правильный формат номера телефона')
+        
+        cart_data = db.cart.get_all()
+        order_data = db.orders.get_all()
+
+        id_ = order_data[-1].id + 1 if order_data else 1
+        for row in cart_data:
+            item = {'id': id_, 'item_id': row.item_id, 'amount': row.amount}
+            db.orders.put(item)
+
+        for row in cart_data:
+            db.cart.delete('item_id', row.item_id)
+        return redirect(url_for('cart'))
+
     return render_template('order.html')
 
 
 @app.route('/about')
 def about():
-    return 'О компании'
+    return 'Контакты'
 
 
 if __name__ == "__main__":
