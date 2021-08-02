@@ -1,11 +1,15 @@
 <link rel="stylesheet" type="text/css" href="static/css/register.css">
 <form action='/register' method='post'>
+    {{error}}
     <ul class="form">
         <li>
-            <input type="text" name="name" placeholder="Имя">
+            <input type="text" name="login" placeholder="Логин">
         </li>
         <li>
-            <input type="text" name="fname" placeholder="Фамилия">
+            <input type="password" name="password" placeholder="Пароль">
+        </li>
+        <li>
+            <input type="password" name="password_check" placeholder="Пароль2">
         </li>
         <li>
             <input type="text" name="phone_number" placeholder="Номер Телефона">
